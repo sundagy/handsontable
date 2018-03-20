@@ -24,7 +24,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * Version: 0.38.0
- * Release date: 14/03/2018 (built at 20/03/2018 03:06:00)
+ * Release date: 14/03/2018 (built at 20/03/2018 13:51:07)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -5283,13 +5283,14 @@ function getScrollableElement(element) {
       overflow,
       overflowX,
       overflowY,
-      computedStyle = '',
+      computedStyle = false,
       computedOverflow = '',
       computedOverflowY = '',
       computedOverflowX = '';
 
   while (el && el.style && document.body !== el) {
-    if (el.style.position == 'fixed') {
+    computedStyle = window.getComputedStyle ? window.getComputedStyle(el) : false;
+    if (el.style.position == 'fixed' || computedStyle && computedStyle.getPropertyValue('position') == 'fixed') {
       el = el.parentNode;
       continue;
     }
@@ -5300,8 +5301,7 @@ function getScrollableElement(element) {
 
     if (overflow == 'scroll' || overflowX == 'scroll' || overflowY == 'scroll') {
       return el;
-    } else if (window.getComputedStyle) {
-      computedStyle = window.getComputedStyle(el);
+    } else if (computedStyle) {
       computedOverflow = computedStyle.getPropertyValue('overflow');
       computedOverflowY = computedStyle.getPropertyValue('overflow-y');
       computedOverflowX = computedStyle.getPropertyValue('overflow-x');
@@ -45872,11 +45872,11 @@ Handsontable.DefaultSettings = _defaultSettings2.default;
 Handsontable.EventManager = _eventManager2.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
-Handsontable.buildDate = '20/03/2018 03:06:00';
+Handsontable.buildDate = '20/03/2018 13:51:07';
 Handsontable.packageName = 'handsontable';
 Handsontable.version = '0.38.0';
 
-var baseVersion = undefined;
+var baseVersion = '';
 
 if (baseVersion) {
   Handsontable.baseVersion = baseVersion;

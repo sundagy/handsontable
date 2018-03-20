@@ -589,13 +589,14 @@ export function getScrollableElement(element) {
     overflow,
     overflowX,
     overflowY,
-    computedStyle = '',
+    computedStyle = false,
     computedOverflow = '',
     computedOverflowY = '',
     computedOverflowX = '';
 
   while (el && el.style && document.body !== el) {
-    if (el.style.position == 'fixed') {
+    computedStyle = window.getComputedStyle ? window.getComputedStyle(el) : false;
+    if (el.style.position == 'fixed' || (computedStyle && computedStyle.getPropertyValue('position') == 'fixed')) {
       el = el.parentNode;
       continue;
     }
@@ -606,9 +607,7 @@ export function getScrollableElement(element) {
 
     if (overflow == 'scroll' || overflowX == 'scroll' || overflowY == 'scroll') {
       return el;
-
-    } else if (window.getComputedStyle) {
-      computedStyle = window.getComputedStyle(el);
+    } else if (computedStyle) {
       computedOverflow = computedStyle.getPropertyValue('overflow');
       computedOverflowY = computedStyle.getPropertyValue('overflow-y');
       computedOverflowX = computedStyle.getPropertyValue('overflow-x');
