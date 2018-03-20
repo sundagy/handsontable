@@ -595,6 +595,11 @@ export function getScrollableElement(element) {
     computedOverflowX = '';
 
   while (el && el.style && document.body !== el) {
+    if (el.style.position == 'fixed') {
+      el = el.parentNode;
+      continue;
+    }
+
     overflow = el.style.overflow;
     overflowX = el.style.overflowX;
     overflowY = el.style.overflowY;

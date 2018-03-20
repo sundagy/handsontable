@@ -24,7 +24,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * Version: 0.38.0
- * Release date: 14/03/2018 (built at 12/03/2018 15:07:01)
+ * Release date: 14/03/2018 (built at 20/03/2018 03:06:00)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -744,6 +744,11 @@ function getScrollableElement(element) {
       computedOverflowX = '';
 
   while (el && el.style && document.body !== el) {
+    if (el.style.position == 'fixed') {
+      el = el.parentNode;
+      continue;
+    }
+
     overflow = el.style.overflow;
     overflowX = el.style.overflowX;
     overflowY = el.style.overflowY;
@@ -28364,7 +28369,7 @@ Handsontable.DefaultSettings = _defaultSettings2.default;
 Handsontable.EventManager = _eventManager2.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
-Handsontable.buildDate = '12/03/2018 15:07:01';
+Handsontable.buildDate = '20/03/2018 03:06:00';
 Handsontable.packageName = 'handsontable';
 Handsontable.version = '0.38.0';
 
@@ -30776,7 +30781,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_233__;
 /* 234 */
 /***/ (function(module, exports) {
 
-
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 /* 235 */
