@@ -583,7 +583,7 @@ export function getScrollLeft(element) {
  * @param {HTMLElement} element
  * @returns {HTMLElement} Element's scrollable parent
  */
-export function getScrollableElement(element, nofixed) {
+export function getScrollableElement(element) {
   var el = element.parentNode,
     props = ['auto', 'scroll'],
     overflow,
@@ -593,15 +593,12 @@ export function getScrollableElement(element, nofixed) {
     computedOverflow = '',
     computedOverflowY = '',
     computedOverflowX = '';
-  nofixed = nofixed || false;
 
   while (el && el.style && document.body !== el) {
     computedStyle = window.getComputedStyle ? window.getComputedStyle(el) : false;
-	if (nofixed) {
-		if (el.style.position == 'fixed' || (computedStyle && computedStyle.getPropertyValue('position') == 'fixed')) {
-		  el = el.parentNode;
-		  continue;
-		}
+	if (el.style.position == 'fixed' || (computedStyle && computedStyle.getPropertyValue('position') == 'fixed')) {
+	  el = el.parentNode;
+	  continue;
 	}
 
     overflow = el.style.overflow;
