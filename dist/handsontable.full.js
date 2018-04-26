@@ -24,7 +24,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * Version: 0.38.0
- * Release date: 14/03/2018 (built at 26/04/2018 04:05:13)
+ * Release date: 14/03/2018 (built at 26/04/2018 04:43:23)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -5277,25 +5277,22 @@ function getScrollLeft(element) {
  * @param {HTMLElement} element
  * @returns {HTMLElement} Element's scrollable parent
  */
-function getScrollableElement(element, nofixed) {
+function getScrollableElement(element) {
   var el = element.parentNode,
       props = ['auto', 'scroll'],
       overflow,
       overflowX,
       overflowY,
-      computedStyle = false,
+      computedStyle = '',
       computedOverflow = '',
       computedOverflowY = '',
       computedOverflowX = '';
-  nofixed = nofixed || false;
 
   while (el && el.style && document.body !== el) {
     computedStyle = window.getComputedStyle ? window.getComputedStyle(el) : false;
-    if (nofixed) {
-      if (el.style.position == 'fixed' || computedStyle && computedStyle.getPropertyValue('position') == 'fixed') {
-        el = el.parentNode;
-        continue;
-      }
+    if (el.style.position == 'fixed' || computedStyle && computedStyle.getPropertyValue('position') == 'fixed') {
+      el = el.parentNode;
+      continue;
     }
 
     overflow = el.style.overflow;
@@ -5304,7 +5301,8 @@ function getScrollableElement(element, nofixed) {
 
     if (overflow == 'scroll' || overflowX == 'scroll' || overflowY == 'scroll') {
       return el;
-    } else if (computedStyle) {
+    } else if (window.getComputedStyle) {
+      computedStyle = window.getComputedStyle(el);
       computedOverflow = computedStyle.getPropertyValue('overflow');
       computedOverflowY = computedStyle.getPropertyValue('overflow-y');
       computedOverflowX = computedStyle.getPropertyValue('overflow-x');
@@ -45875,11 +45873,11 @@ Handsontable.DefaultSettings = _defaultSettings2.default;
 Handsontable.EventManager = _eventManager2.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
-Handsontable.buildDate = '26/04/2018 04:05:13';
+Handsontable.buildDate = '26/04/2018 04:43:23';
 Handsontable.packageName = 'handsontable';
 Handsontable.version = '0.38.0';
 
-var baseVersion = '';
+var baseVersion = undefined;
 
 if (baseVersion) {
   Handsontable.baseVersion = baseVersion;

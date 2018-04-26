@@ -589,7 +589,7 @@ export function getScrollableElement(element) {
     overflow,
     overflowX,
     overflowY,
-    computedStyle = false,
+    computedStyle = '',
     computedOverflow = '',
     computedOverflowY = '',
     computedOverflowX = '';
@@ -600,14 +600,16 @@ export function getScrollableElement(element) {
 	  el = el.parentNode;
 	  continue;
 	}
-
+	
     overflow = el.style.overflow;
     overflowX = el.style.overflowX;
     overflowY = el.style.overflowY;
 
     if (overflow == 'scroll' || overflowX == 'scroll' || overflowY == 'scroll') {
       return el;
-    } else if (computedStyle) {
+
+    } else if (window.getComputedStyle) {
+      computedStyle = window.getComputedStyle(el);
       computedOverflow = computedStyle.getPropertyValue('overflow');
       computedOverflowY = computedStyle.getPropertyValue('overflow-y');
       computedOverflowX = computedStyle.getPropertyValue('overflow-x');
