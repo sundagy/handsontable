@@ -262,7 +262,7 @@ TextEditor.prototype.refreshDimensions = function() {
   var
     currentOffset = offset(this.TD),
     containerOffset = offset(this.instance.rootElement),
-    scrollableContainer = getScrollableElement(this.TD),
+    scrollableContainer = getScrollableElement(this.TD, true),
     totalRowsCount = this.instance.countRows(),
 
     // If colHeaders is disabled, cells in the first row have border-top

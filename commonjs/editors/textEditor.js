@@ -261,7 +261,7 @@ TextEditor.prototype.refreshDimensions = function () {
   }
   var currentOffset = (0, _element.offset)(this.TD),
       containerOffset = (0, _element.offset)(this.instance.rootElement),
-      scrollableContainer = (0, _element.getScrollableElement)(this.TD),
+      scrollableContainer = (0, _element.getScrollableElement)(this.TD, true),
       totalRowsCount = this.instance.countRows(),
 
 

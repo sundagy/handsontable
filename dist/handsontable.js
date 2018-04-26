@@ -24,7 +24,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  * 
  * Version: 0.38.0
- * Release date: 14/03/2018 (built at 20/03/2018 13:51:07)
+ * Release date: 14/03/2018 (built at 26/04/2018 04:05:13)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -732,7 +732,7 @@ function getScrollLeft(element) {
  * @param {HTMLElement} element
  * @returns {HTMLElement} Element's scrollable parent
  */
-function getScrollableElement(element) {
+function getScrollableElement(element, nofixed) {
   var el = element.parentNode,
       props = ['auto', 'scroll'],
       overflow,
@@ -742,12 +742,15 @@ function getScrollableElement(element) {
       computedOverflow = '',
       computedOverflowY = '',
       computedOverflowX = '';
+  nofixed = nofixed || false;
 
   while (el && el.style && document.body !== el) {
     computedStyle = window.getComputedStyle ? window.getComputedStyle(el) : false;
-    if (el.style.position == 'fixed' || computedStyle && computedStyle.getPropertyValue('position') == 'fixed') {
-      el = el.parentNode;
-      continue;
+    if (nofixed) {
+      if (el.style.position == 'fixed' || computedStyle && computedStyle.getPropertyValue('position') == 'fixed') {
+        el = el.parentNode;
+        continue;
+      }
     }
 
     overflow = el.style.overflow;
@@ -8076,7 +8079,7 @@ TextEditor.prototype.refreshDimensions = function () {
   }
   var currentOffset = (0, _element.offset)(this.TD),
       containerOffset = (0, _element.offset)(this.instance.rootElement),
-      scrollableContainer = (0, _element.getScrollableElement)(this.TD),
+      scrollableContainer = (0, _element.getScrollableElement)(this.TD, true),
       totalRowsCount = this.instance.countRows(),
 
 
@@ -28369,7 +28372,7 @@ Handsontable.DefaultSettings = _defaultSettings2.default;
 Handsontable.EventManager = _eventManager2.default;
 Handsontable._getListenersCounter = _eventManager.getListenersCounter; // For MemoryLeak tests
 
-Handsontable.buildDate = '20/03/2018 13:51:07';
+Handsontable.buildDate = '26/04/2018 04:05:13';
 Handsontable.packageName = 'handsontable';
 Handsontable.version = '0.38.0';
 
@@ -31127,7 +31130,7 @@ SelectEditor.prototype.refreshDimensions = function () {
       height = (0, _element.outerHeight)(this.TD) + 1,
       currentOffset = (0, _element.offset)(this.TD),
       containerOffset = (0, _element.offset)(this.instance.rootElement),
-      scrollableContainer = (0, _element.getScrollableElement)(this.TD),
+      scrollableContainer = (0, _element.getScrollableElement)(this.TD, true),
       editTop = currentOffset.top - containerOffset.top - 1 - (scrollableContainer.scrollTop || 0),
       editLeft = currentOffset.left - containerOffset.left - 1 - (scrollableContainer.scrollLeft || 0),
       editorSection = this.checkEditorSection(),
