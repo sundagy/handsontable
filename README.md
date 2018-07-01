@@ -2,6 +2,8 @@
   <a href="//handsontable.com" target="_blank"><img src="https://raw.githubusercontent.com/handsontable/static-files/master/Images/Logo/Handsontable/Handsontable-logo-300-74-new.png" alt="Handsontable Community Edition logo" /></a>
 </div>
 
+In this fork fixed problem with fly select box in bootstrap modal widget.
+
 <br/>
 
 [**Handsontable Community Edition (CE)**](//handsontable.com) is an open source JavaScript/HTML5 UI Spreadsheet component for web apps. It easily integrates with any data source and comes with a variety of useful features like data binding, validation, sorting or powerful context menu. It is available for [Vue](//github.com/handsontable/vue-handsontable-official), [React](//github.com/handsontable/react-handsontable), [Angular](//github.com/handsontable/angular-handsontable) and [Polymer](//github.com/handsontable/hot-table).
